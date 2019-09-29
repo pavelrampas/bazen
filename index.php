@@ -7,14 +7,7 @@ $api = filter_input(INPUT_GET, 'api');
 $token = filter_input(INPUT_GET, 'token');
 
 if (isset($api) && isset($token) && $token == $configToken) {
-	ob_start();
 	echo 'ok';
-	header('Content-Encoding: none');
-	header('Content-Length: ' . ob_get_length());
-	header('Connection: close');
-	ob_end_flush();
-	ob_flush();
-	flush();
 
 	if ((int) date('G', time()) > 6 && (int) date('G', time()) < 22) {
 		preg_match('/<td>(\d*)<\/td>/', file_get_contents('https://www.cbsport.cz/obsazenost-sportovist/'), $number);
