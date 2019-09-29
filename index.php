@@ -25,7 +25,7 @@ $datetime = new DateTime();
 $datetime->modify('-30 day');
 
 $db = new mysqli($configHost, $configUser, $configPass, $configDb);
-$result = $db->query("SELECT * FROM `pool` WHERE `datetime` > " . $datetime->format('Y-m-d') . " ORDER BY `datetime` DESC");
+$result = $db->query("SELECT * FROM `pool` WHERE `datetime` > " . $datetime->format('Y-m-d') . " ORDER BY `datetime`");
 
 $html = '';
 $dayActual = '0';
