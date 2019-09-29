@@ -10,9 +10,14 @@ if (isset($api) && isset($token) && $token == $configToken) {
 	echo 'ok';
 
 	if ((int) date('G', time()) > 6 && (int) date('G', time()) < 22) {
-		preg_match('/<td>(\d*)<\/td>/', file_get_contents('https://www.cbsport.cz/obsazenost-sportovist/'), $number);
+		$content = @file_get_contents('https://www.cbsport.cz/obsazenost-sportovist/');
+		$db = new mysqli($configHost, $configUser, $configPass, $configDb);
+		if ($content === false) {
+			$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('0', now());");
+			exit;
+		}
+		preg_match('/<td>(\d*)<\/td>/', $content, $number);
 		if (isset($number[1])) {
-			$db = new mysqli($configHost, $configUser, $configPass, $configDb);
 			$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('" . $number[1] . "', now());");
 		}
 	}
