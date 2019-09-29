@@ -2,23 +2,36 @@
 
 require 'config.php'; // config file
 
-$db = new mysqli($configHost, $configUser, $configPass, $configDb); // connect db
-
 // api cron part
 $api = filter_input(INPUT_GET, 'api');
 $token = filter_input(INPUT_GET, 'token');
 
-if (isset($api) && isset($token) && $token == $configToken && (int) date('G', time()) > 6 && (int) date('G', time()) < 22) {
-	preg_match('/<td>(\d*)<\/td>/', file_get_contents('https://www.cbsport.cz/obsazenost-sportovist/'), $number);
-	if (isset($number[1])) {
-		$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('" . $number[1] . "', now());");
+if (isset($api) && isset($token) && $token == $configToken) {
+	ob_start();
+	echo 'ok';
+	header('Content-Encoding: none');
+	header('Content-Length: ' . ob_get_length());
+	header('Connection: close');
+	ob_end_flush();
+	ob_flush();
+	flush();
+
+	if ((int) date('G', time()) > 6 && (int) date('G', time()) < 22) {
+		preg_match('/<td>(\d*)<\/td>/', file_get_contents('https://www.cbsport.cz/obsazenost-sportovist/'), $number);
+		if (isset($number[1])) {
+			$db = new mysqli($configHost, $configUser, $configPass, $configDb);
+			$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('" . $number[1] . "', now());");
+		}
 	}
+
+	exit;
 }
 
 // display part
 $datetime = new DateTime();
 $datetime->modify('-30 day');
 
+$db = new mysqli($configHost, $configUser, $configPass, $configDb);
 $result = $db->query("SELECT * FROM `pool` WHERE `datetime` > " . $datetime->format('Y-m-d') . " ORDER BY `datetime` DESC");
 
 $html = '';
