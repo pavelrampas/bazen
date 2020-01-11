@@ -10,16 +10,14 @@ if (isset($api) && isset($token) && $token == $configToken) {
 	echo 'ok';
 
 	if ((int) date('G', time()) > 6 && (int) date('G', time()) < 22) {
-		$content = @file_get_contents('https://www.cbsport.cz/obsazenost-sportovist/');
+		$number = 0;
+		$content = @file_get_contents('https://www.szcb.cz/plavecky-stadion-a-plovarna/');
 		$db = new mysqli($configHost, $configUser, $configPass, $configDb);
-		if ($content === false) {
-			$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('0', now());");
-			exit;
+		preg_match('/<span class=\"green-text\">(\d+)<\/span>/', $content, $data);
+		if (isset($data[1])) {
+			$number = $data[1];
 		}
-		preg_match('/<td>(\d*)<\/td>/', $content, $number);
-		if (isset($number[1])) {
-			$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('" . $number[1] . "', now());");
-		}
+		$db->query("INSERT INTO `pool` (`number`, `datetime`) VALUES ('" . $number . "', now());");
 	}
 
 	exit;
@@ -73,7 +71,7 @@ $html .= '</tr>' . PHP_EOL;
     </head>
     <body>
 		<h1>Obsazenost plaveckého bazénu České Budějovice</h1>
-		<p><a href="https://www.cbsport.cz/obsazenost-sportovist/">Sportovní zařízení města České Budějovice</a></p>
+		<p><a href="https://www.szcb.cz/plavecky-stadion-a-plovarna/">Sportovní zařízení města České Budějovice</a></p>
 		<table>
 			<thead>
 				<tr>
