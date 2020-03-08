@@ -1,5 +1,26 @@
 <?php
 
+function dayOfWeek(int $dayNumber) {
+	switch ($dayNumber) {
+		case 1:
+			return 'Po';
+		case 2:
+			return 'Út';
+		case 3:
+			return 'St';
+		case 4:
+			return 'Čt';
+		case 5:
+			return 'Pá';
+		case 6:
+			return 'So';
+		case 7:
+			return 'Ne';
+		default:
+			return '';
+	}
+}
+
 require 'config.php'; // config file
 
 // api cron part
@@ -43,7 +64,9 @@ while ($row = $result->fetch_assoc()) {
 		} else {
 			$html .= '</tr>';
 		}
-		$html .= '<tr>';
+		$dayOfWeek = date('N', strtotime($row['datetime']));
+		$html .= '<tr class="day' . $dayOfWeek . '">';
+		$html .= '<td class="grey">' . dayOfWeek($dayOfWeek) . '</td>';
 		$html .= '<td class="grey">' . date('d. m.', strtotime($row['datetime'])) . '</td>';
 	}
 
@@ -67,14 +90,17 @@ $html .= '</tr>' . PHP_EOL;
 			table{border-collapse:collapse;}
             table, td, th{border:#000 solid 1px;padding:5px;text-align:center;font-size:0.9em;}
 			.grey, th{background-color:#ccc;}
+			.day6, .day7{background-color:#eee;}
         </style>
     </head>
     <body>
 		<h1>Obsazenost plaveckého bazénu České Budějovice</h1>
 		<p><a href="https://www.szcb.cz/plavecky-stadion-a-plovarna/">Sportovní zařízení města České Budějovice</a></p>
+		<h2>Návštěvnost za posledních 60 dní</h2>
 		<table>
 			<thead>
 				<tr>
+					<th>Den</th>
 					<th>Datum</th>
 					<th>7:00</th>
 					<th>7:30</th>
