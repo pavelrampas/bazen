@@ -88,7 +88,7 @@ while ($row = $resultAll->fetch_assoc()) {
 		}
 		$dayOfWeek = date('N', strtotime($row['datetime']));
 		$htmlAll .= '<tr class="day' . $dayOfWeek . '">';
-		$htmlAll .= '<td class="grey">' . dayOfWeek($dayOfWeek) . '</td>';
+		$htmlAll .= '<td class="grey">' . dayOfWeek((int) $dayOfWeek) . '</td>';
 		$htmlAll .= '<td class="grey">' . date('d. m.', strtotime($row['datetime'])) . '</td>';
 	}
 
