@@ -106,14 +106,6 @@ $htmlAll .= '</tr>' . PHP_EOL;
         <meta name="author" content="Pavel Rampas">
 		<meta name="description" content="Obsazenost plaveckého bazénu České Budějovice.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body{margin:20px;font-family:"arial";}
-			h1{margin-top:0;}
-			table{border-collapse:collapse;}
-            table, td, th{border:#000 solid 1px;padding:5px;text-align:center;font-size:0.9em;}
-			.grey, th{background-color:#ccc;}
-			.day6, .day7{background-color:#eee;}
-        </style>
     </head>
     <body>
 		<h1>Obsazenost plaveckého bazénu České Budějovice</h1>
@@ -200,5 +192,6 @@ $htmlAll .= '</tr>' . PHP_EOL;
 				<?php echo $htmlAll ?>
 			</tbody>
 		</table>
+		<link rel="stylesheet" href="/style.css?v=1">
     </body>
 </html>
