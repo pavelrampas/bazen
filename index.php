@@ -106,6 +106,7 @@ $htmlAll .= '</tr>' . PHP_EOL;
         <meta name="author" content="Pavel Rampas">
 		<meta name="description" content="Obsazenost plaveckého bazénu České Budějovice.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style.css?v=1">
     </head>
     <body>
 		<h1>Obsazenost plaveckého bazénu České Budějovice</h1>
@@ -192,6 +193,5 @@ $htmlAll .= '</tr>' . PHP_EOL;
 				<?php echo $htmlAll ?>
 			</tbody>
 		</table>
-		<link rel="stylesheet" href="/style.css?v=1">
     </body>
 </html>
