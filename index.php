@@ -32,9 +32,9 @@ if (isset($api) && isset($token) && $token == $configToken) {
 
 	if ((int) date('G', time()) > 6 && (int) date('G', time()) < 22) {
 		$number = 0;
-		$content = @file_get_contents('https://www.szcb.cz/plavecky-stadion-a-plovarna/');
+		$content = @file_get_contents('https://www.szcb.cz/plavecky-stadion/');
 		$db = new mysqli($configHost, $configUser, $configPass, $configDb);
-		preg_match('/<span class=\"green-text\">(\d+)<\/span>/', $content, $data);
+		preg_match('/<div class=\"panel-ratio\">(\d+) \/ (\d+)<\/div>/', $content, $data);
 		if (isset($data[1])) {
 			$number = $data[1];
 		}
