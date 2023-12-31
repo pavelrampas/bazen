@@ -110,7 +110,7 @@ $htmlAll .= '</tr>' . PHP_EOL;
     </head>
     <body>
 		<h1>Obsazenost plaveckého bazénu České Budějovice</h1>
-		<p><a href="https://www.szcb.cz/plavecky-stadion-a-plovarna/">Sportovní zařízení města České Budějovice</a></p>
+		<p><a href="https://www.szcb.cz/plavecky-stadion/">Sportovní zařízení města České Budějovice</a></p>
 		<h2>Průměrná návštěvnost v jednotlivé časy za posledních 60 dní</h2>
 		<table>
 			<thead>
