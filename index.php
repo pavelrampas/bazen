@@ -101,8 +101,8 @@ $htmlAll .= '</tr>' . PHP_EOL;
 <!DOCTYPE html>
 <html lang="cs">
     <head>
-        <title>Plavecký bazén České Budějovice</title>
         <meta charset="utf-8">
+        <title>Plavecký bazén České Budějovice</title>
         <meta name="author" content="Pavel Rampas">
 		<meta name="description" content="Obsazenost plaveckého bazénu České Budějovice.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
